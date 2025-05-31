@@ -11,11 +11,11 @@ private:
 	double y;
 
 public:
-	Point() : x(0), y(0) {}
-	Point(double other_x, double other_y) : x(other_x), y(other_y) {}
-	~Point(){}
+	Point(double other_x, double other_y) : x(other_x), y(other_y) { cout << "Constructor: " << tab << tab << this << endl; }
+	Point() : Point(0, 0) {}
+	~Point() { cout << "Destructor: " << tab << tab << this << endl; }
 
-	double distance(Point& other) {
+	double distance(Point& other) const {
 		return sqrt(pow((other.x - x), 2) + pow((other.y - y), 2));
 	}
 
@@ -29,12 +29,16 @@ public:
 	double get_x() const {
 		return x;
 	}
-	double get_y() const{
+	double get_y() const {
 		return y;
+	}
+
+	void print() const {
+		cout << "X = " << get_x() << tab << "Y = " << get_y() << endl;
 	}
 };
 
-double distance(Point& A, Point& B) {
+const double distance(Point& A, Point& B) {
 	return sqrt(pow((B.get_x() - A.get_x()), 2) + pow((B.get_y() - A.get_y()), 2));
 }
 
@@ -56,16 +60,15 @@ void main() {
 #endif // STRUCT_POINT
 
 	Point A;
-	A.set_x(2);
-	A.set_y(3);
+	//cout << "A :" << tab << A.get_x() << tab << A.get_y() << endl;
+	A.print();
 
-	Point B;
-	B.set_x(5);
-	B.set_y(7);
+	Point B(5, 7);
+	//	cout << "B :" << tab << B.get_x() << tab << B.get_y() << endl;
+	B.print();
 
-	cout << A.get_x() << tab << A.get_y() << endl;
 
-	cout << A.distance(B) << endl;
+	cout << "Distance from A to be via method: " << tab << A.distance(B) << endl;
 
-	cout << distance(A, B) << endl;
+	cout << "Distance from A to be via function: " << tab << distance(A, B) << endl;
 }
