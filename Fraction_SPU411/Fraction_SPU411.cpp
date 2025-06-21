@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
 using namespace std;
 
@@ -9,9 +10,9 @@ Fraction operator/(const Fraction& left, const Fraction& right);
 
 class Fraction
 {
-	int integer;		
-	int numerator;		
-	int denominator;	
+	int integer;
+	int numerator;
+	int denominator;
 public:
 	int get_integer()const
 	{
@@ -148,7 +149,7 @@ Fraction operator*(Fraction left, Fraction right)
 	left.to_improper();
 	right.to_improper();
 
-	return Fraction (left.get_numerator() * right.get_numerator(),left.get_denominator() * right.get_denominator()).to_proper();
+	return Fraction(left.get_numerator() * right.get_numerator(), left.get_denominator() * right.get_denominator()).to_proper();
 }
 Fraction operator/(const Fraction& left, const Fraction& right)
 {
@@ -181,12 +182,24 @@ ostream& operator<<(ostream& os, const Fraction& obj)
 	return os;
 }
 istream& operator>>(istream& is, Fraction& obj) {
-	int temp;
-
-	if (is >> temp) obj.set_integer(temp);
-	if (is >> temp) obj.set_numerator(temp);
-	if (is >> temp) obj.set_denominator(temp);
-
+	const int SIZE = 32;
+	char sz_input[SIZE] = {};
+	is.getline(sz_input, SIZE);
+	cout << sz_input << endl;
+	const char delimiters[]{ '(',')','/',' ',',','.',0 };
+	char numbers[3] = {};
+	int n = 0;
+	for (char* pch = strtok(sz_input, delimiters); pch && n < 3; pch = strtok(NULL, delimiters))
+		numbers[n++] = atoi(pch);
+	//for (int i = 0; i < n; i++) cout << numbers[i] << "\t"; cout << endl;
+	switch (n)
+	{
+	case 1: obj = numbers[0];
+	case 2: obj = Fraction(numbers[0], numbers[1]);
+	case 3: obj = Fraction(numbers[0], numbers[1], numbers[2]);
+	default:
+		break;
+	}
 	return is;
 }
 
@@ -201,23 +214,23 @@ int main()
 	setlocale(LC_ALL, "");
 
 #ifdef CONSTRUCTORS_CHECK
-	Fraction A;			
+	Fraction A;
 	A.print();
 
-	Fraction B = 5;		
+	Fraction B = 5;
 	B.print();
 
-	Fraction C(1, 2);	
+	Fraction C(1, 2);
 	C.print();
 
 	Fraction D(2, 3, 4);
 	D.print();
 
-	Fraction E = D;		
+	Fraction E = D;
 	E.print();
 
 	Fraction F;
-	F = E;				
+	F = E;
 	F.print();
 #endif // CONSTRUCTORS_CHECK
 
