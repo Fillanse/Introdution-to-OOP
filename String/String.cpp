@@ -1,6 +1,8 @@
 #include <iostream>
 using namespace std;
 
+class String;
+String operator+(const String& left, const String& right);
 class String
 {
 public:
@@ -15,7 +17,9 @@ public:
 		assign(str);
 	}
 	String(const String& other) {
-		*this = other;
+		_size = other._size;
+		_str = new char[_size] {};
+		for (int i = 0; _str[i]; i++) _str[i] = _str[i];
 	}
 	~String() { delete[] _str; }
 
@@ -35,6 +39,9 @@ public:
 	String& operator=(const char* str) {
 		assign(str);
 		return *this;
+	}
+	String& operator+=(const String& str) {
+		return *this = *this + str;
 	}
 	char& operator[](int index) {
 		return _str[index];
@@ -95,6 +102,11 @@ ostream& operator<<(ostream& os, const String& str) {
 	}
 	return os;
 }
+istream& operator>>(istream& is, String& str) {
+	char buffer[1024];
+	str = buffer;       
+	return is;
+}
 
 int main()
 {
@@ -102,6 +114,9 @@ int main()
 	String str2 = "World";
 	cout << str1;
 	cout << str2;
-	String str3 = str1 + str2;
-	cout << str3 << endl;
+	//String str3 = str1 + str2;
+	// << str3 << endl;
+	String str;
+	cout << "Введите строку: "; cin >> str;
+	cout << str << endl;
 }

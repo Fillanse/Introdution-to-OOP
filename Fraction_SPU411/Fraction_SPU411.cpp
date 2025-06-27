@@ -110,6 +110,13 @@ public:
 		return old;
 	}
 
+	explicit operator int() const {
+		return integer + numerator / denominator;
+	}
+	explicit operator double() const {
+		return integer + (double)numerator / denominator;
+	}
+
 	Fraction& to_improper()
 	{
 
@@ -274,8 +281,11 @@ int main()
 #endif // COMPARISON_OPERATORS
 
 
-	Fraction A;
-	cout << "Введите простую дробь: "; cin >> A;
+	Fraction A(1,2,3);
 	cout << A << endl;
+	int a = (int)A;
+	cout << a << endl;
+	double b = (double)A;
+	cout << b << endl;
 
 }
