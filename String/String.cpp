@@ -103,7 +103,8 @@ ostream& operator<<(ostream& os, const String& str) {
 	return os;
 }
 istream& operator>>(istream& is, String& str) {
-	char buffer[1024];
+	char buffer[1024] = {};
+	is >> buffer;
 	str = buffer;       
 	return is;
 }
@@ -114,9 +115,24 @@ int main()
 	String str2 = "World";
 	cout << str1;
 	cout << str2;
-	//String str3 = str1 + str2;
-	// << str3 << endl;
+	String str3 = str1 + " " + str2;
+	cout << str3 << endl;
 	String str;
 	cout << "Введите строку: "; cin >> str;
 	cout << str << endl;
+
+
+	string original(100000000, 'a'); // 100 млн символов
+
+	int start_copy = clock();
+	string copy = original;
+	int end_copy = clock();
+	cout << "Copy time: "
+		<< 1000.0 * (end_copy - start_copy) / CLOCKS_PER_SEC << " ms\n";
+
+	int start_move = clock();
+	string moved = move(original);
+	int end_move = clock();
+	cout << "Move time: "
+		<< 1000.0 * (end_move - start_move) / CLOCKS_PER_SEC << " ms\n";
 }

@@ -54,6 +54,9 @@ public:
 		this->denominator = 1;
 		cout << "Constructor:\t\t" << this << endl;
 	}
+	Fraction(double decimal) {
+
+	}
 	Fraction(int numerator, int denominator)
 	{
 		this->integer = 0;
