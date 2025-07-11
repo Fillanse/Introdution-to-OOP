@@ -2,8 +2,8 @@
 #include <Fraction_SPU411.h>
 using namespace std;
 
-//#define CONSTRUCTORS_CHECK
-//#define ASSIGNMENT_CHECK
+#define CONSTRUCTORS_CHECK
+#define ASSIGNMENT_CHECK
 //#define ARITHMETICAL_OPERATORS
 //#define INCREMENT_DECREMENT
 //#define COMPARISON_OPERATORS
