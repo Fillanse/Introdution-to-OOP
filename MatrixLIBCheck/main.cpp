@@ -67,6 +67,7 @@ void main() {
 	Matrix moved = move(A);
 	cout << "Original A:" << endl << A;
 	cout << "Moved from A:" << endl << moved;
+	cout << "Original A (should be empty):" << endl << A;
 	cout << delimiter;
 
 	int arr[2][2] = { {1, 2}, {3, 4} };
